@@ -3,7 +3,7 @@ This is a demo application which creates all 5 servers, loadbalancer and client(
 
 ## Features
 The load balancer:
-  * Distributes client requests efficiently across multiple servers
+  * Dispatches requests to a group of servers in a Round-Robin fashion (every request is forwarded to a different route in a circular order)
   * Provides the flexibility to add or subtract servers as demand dictates
 
 ## Sample Run
