@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ public class Client extends JFrame
     public JTextField  clientOutput;
     JFrame frame = new JFrame("Client Menu");
     JPanel panel = (JPanel) frame.getContentPane();
+    InetAddress o;
     public Client()
     {
         panel.setLayout(null);
@@ -66,20 +68,28 @@ public class Client extends JFrame
                 try 
                 {
                     displayMessage.setText("Your request is being processed");
+                    
+                    Socket s1;
+                    s1 = new Socket("127.0.0.1", 555);
+                    Scanner sc1=new Scanner(s1.getInputStream());
+                    String addr=sc1.next();
+                    sc1=new Scanner(s1.getInputStream());
+                    int port=sc1.nextInt();
+                    
+                    o=InetAddress.getByName(addr);
                     Socket s;
-                    Scanner sc=new Scanner(System.in);
-                    s = new Socket("127.0.0.1", 555);
-                    Scanner sc1=new Scanner(s.getInputStream());
+                    s = new Socket(o, port);
+                    Scanner sc2=new Scanner(s.getInputStream());
                     String text=clientInput.getText();
                     int num=Integer.parseInt(text);
                     PrintStream p=new PrintStream(s.getOutputStream());
                     p.println(num);
-                    int temp=sc1.nextInt();
+                    int temp=sc2.nextInt();
                     clientOutput.setText(Integer.toString(temp));
                     displayMessage.setText("");
                 } catch (IOException ex) {
                     Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                } 
             }
         }
         );
