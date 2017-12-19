@@ -23,10 +23,6 @@ public class Server4
             number=sc.nextInt();
             Task task = new Task(socket, number);
             executor.execute(task);
-            //temp=number*2;
-            //PrintStream p=new PrintStream(s.getOutputStream());
-            //p.println(temp);
-            //s.close();
             if(number==0) break;
         }
         System.out.println("Shutting down Socket server!!");
