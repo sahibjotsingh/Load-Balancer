@@ -15,8 +15,8 @@ class Task implements Runnable
  
     public Task(Socket s, int number) 
     {
-        this.s=s;
-        this.number=number;
+        this.s = s;
+        this.number = number;
     }
     
     @Override
@@ -24,7 +24,7 @@ class Task implements Runnable
     {
         try
         {
-            PrintStream p=new PrintStream(s.getOutputStream());
+            PrintStream p = new PrintStream(s.getOutputStream());
             p.println(number*number);
             TimeUnit.SECONDS.sleep(10);
         } 

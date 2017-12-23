@@ -2,9 +2,7 @@ package LoadBalancer;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
@@ -12,16 +10,14 @@ import java.util.logging.Logger;
 
 public class loadBalancingThread extends Thread
 {
-    public int iterator=-1;
+    public int iterator = -1;
     String IPAddress[] = {"127.0.0.1", "127.0.0.1", "127.0.0.1", "127.0.0.1", "127.0.0.1"};
-    int ports[]={123, 124, 125, 126, 127};
-    private BlockingQueue<Integer> queue =new LinkedBlockingQueue<Integer>();
-    private BlockingQueue<Socket> queue2 =new LinkedBlockingQueue<Socket>();
+    int port[] = {123, 124, 125, 126, 127};
+    private BlockingQueue<Socket> queue =new LinkedBlockingQueue<Socket>();
     
-    public void accept(int data, Socket m) 
+    public void accept(Socket m) 
     {
-        queue.add(data);
-        queue2.add(m);
+        queue.add(m);
     }
    
    @Override
@@ -30,7 +26,7 @@ public class loadBalancingThread extends Thread
         while (true)
             try 
             {
-                RoundRobin(queue.take(), queue2.take());
+                RoundRobin(queue.take());
             }
             catch (InterruptedException e) {
             } catch (IOException ex) {
@@ -38,7 +34,7 @@ public class loadBalancingThread extends Thread
             }
    }
    
-   private void RoundRobin(final int data, final Socket si) throws IOException
+   private void RoundRobin(final Socket si) throws IOException
    {
             iterator=((iterator+1)%5);
             
@@ -46,6 +42,6 @@ public class loadBalancingThread extends Thread
             p1.println(IPAddress[iterator]);
             
             PrintStream p2=new PrintStream(si.getOutputStream());
-            p2.println(ports[iterator]);
+            p2.println(port[iterator]);
    }
 }
