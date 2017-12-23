@@ -10,10 +10,6 @@ The load balancer:
 1. First run all servers and the load balancer.
 2. Run the client(s). Write a number and click on send button.
 
-## Suggested Work
-I didn't work much on this application since 2-3 months. However I thought of the following todo :
- 1. Make the load balancer return the IP address and port number of the server.
- 2. The client connection then gets established directly with the server.
 
 
 
