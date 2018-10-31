@@ -1,5 +1,5 @@
 # Load Balancer
-This is a demo application which creates all 5 servers, loadbalancer and client(s) that are localhost only.
+A simple client-server application showing how to implement the load balancing if we need to increase the performance by distributing the workload across multiple services. All 5 servers, loadbalancer and client(s) that are localhost only.
 
 ## Features
 The load balancer:
